@@ -37,7 +37,7 @@ A backend service for fetching and analyzing LinkedIn company page data.
 
 ### Step 1: Clone Repository
 
-git clone https://github.com/yourusername/linkedin-insights.git
+git clone https://github.com/pranav-sarotra/linkedin-insights.git
 cd linkedin-insights
 
 ### Step 2: Create Virtual Environment
@@ -85,15 +85,80 @@ The API will be available at http://localhost:5000
 
 ### Pages
 
-| Method | Endpoint                      | Description              |
-|--------|-------------------------------|--------------------------|
-| GET    | /api/pages/                   | Get all pages with filters |
-| GET    | /api/pages/{page_id}          | Get specific page        |
-| POST   | /api/pages/{page_id}/scrape   | Scrape a page from LinkedIn |
-| GET    | /api/pages/{page_id}/posts    | Get page posts           |
-| GET    | /api/pages/{page_id}/employees| Get page employees       |
-| GET    | /api/pages/{page_id}/followers| Get page followers       |
-| GET    | /api/pages/{page_id}/summary  | Get AI summary           |
+## 📡 API Endpoints
+
+### 🩺 Health & Info
+| Method | Endpoint | Description |
+|------|--------|------------|
+| GET | `/api/health` | Health check |
+| GET | `/api/info` | API metadata |
+
+---
+
+### 🕷️ Scraping
+| Method | Endpoint | Description |
+|------|--------|------------|
+| POST | `/api/scrape/deepsolv` | Scrape DeepSolv LinkedIn page |
+| POST | `/api/scrape/google` | Scrape Google LinkedIn page |
+| POST | `/api/scrape/microsoft` | Scrape Microsoft LinkedIn page |
+
+> ⚠️ These endpoints explicitly trigger scraping jobs.
+
+---
+
+### 📄 Pages (Collection)
+| Method | Endpoint | Description |
+|------|--------|------------|
+| GET | `/api/pages` | Get all pages |
+| GET | `/api/pages?followers_min=` | Filter by followers |
+| GET | `/api/pages?industry=` | Filter by industry |
+| GET | `/api/pages?search=` | Search by name |
+| GET | `/api/pages?page=&limit=` | Pagination |
+| GET | `/api/pages?search=&industry=&followers_min=` | Multiple filters |
+
+---
+
+### 📄 Single Page
+| Method | Endpoint | Description |
+|------|--------|------------|
+| GET | `/api/pages/{page_id}` | Get page (basic) |
+| GET | `/api/pages/{page_id}?include=posts` | Page with posts |
+| GET | `/api/pages/{page_id}?include=employees` | Page with employees |
+| GET | `/api/pages/{page_id}?include=posts,employees` | Page with posts & employees |
+| GET | `/api/pages/{page_id}/refresh` | Force re-scrape |
+
+---
+
+### 📝 Posts
+| Method | Endpoint | Description |
+|------|--------|------------|
+| GET | `/api/pages/{page_id}/posts` | Get page posts |
+| GET | `/api/pages/{page_id}/posts?page=&limit=` | Paginated posts |
+| GET | `/api/pages/{page_id}/posts?include=comments` | Posts with comments |
+
+---
+
+### 👥 Employees & Followers
+| Method | Endpoint | Description |
+|------|--------|------------|
+| GET | `/api/pages/{page_id}/employees` | Get page employees |
+| GET | `/api/pages/{page_id}/employees?page=&limit=` | Paginated employees |
+| GET | `/api/pages/{page_id}/followers` | Get page followers |
+
+---
+
+### 🤖 AI Summary
+| Method | Endpoint | Description |
+|------|--------|------------|
+| GET | `/api/pages/{page_id}/summary` | AI-generated company summary |
+
+---
+
+### ℹ️ Notes
+- Expanded data is retrieved via query parameters (`include=posts`, `include=employees`)
+- Pagination is supported on collection endpoints via `page` and `limit`
+- Scraping endpoints are intentionally separated from read-only data access
+
 
 ### Query Parameters
 
@@ -141,30 +206,37 @@ pytest tests/ -v
 
 ## Project Structure
 
+## 📁 Project Structure
+
+```text
 linkedin_insights/
 ├── app/
-│   ├── __init__.py
-│   ├── config.py
-│   ├── models.py
-│   ├── helpers.py
+│   ├── __init__.py            # App factory / package marker
+│   ├── config.py              # Configuration (env vars, settings)
+│   ├── models.py              # Database models
+│   ├── helpers.py             # Shared utility functions
 │   ├── routes/
 │   │   ├── __init__.py
-│   │   └── pages.py
+│   │   └── pages.py           # Application routes / endpoints
 │   └── services/
 │       ├── __init__.py
-│       ├── scraper.py
-│       └── cache_service.py
+│       ├── scraper.py         # LinkedIn scraping logic
+│       └── cache_service.py   # Caching layer (e.g., Redis, in-memory)
+│
 ├── tests/
 │   ├── __init__.py
-│   └── test_api.py
-├── .env
-├── .gitignore
-├── requirements.txt
-├── setup_db.py
-├── run.py
-├── Dockerfile
-├── docker-compose.yml
-└── README.md
+│   └── test_api.py            # API and integration tests
+│
+├── .env                       # Environment variables
+├── .gitignore                 # Git ignore rules
+├── requirements.txt           # Python dependencies
+├── setup_db.py                # Database initialization script
+├── run.py                     # Application entry point
+├── Dockerfile                 # Docker image definition
+├── docker-compose.yml         # Multi-container setup
+└── README.md                  # Project documentation
+```
+
 
 ## Database Schema
 
