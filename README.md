@@ -60,20 +60,25 @@ pip install -r requirements.txt
 
 Create a .env file in the root directory:
 
+```text
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=linkedin_insights
 SECRET_KEY=your_secret_key_here
 OPENAI_API_KEY=your_openai_key_optional
+```
 
 ### Step 5: Setup Database
 
+```text
 python setup_db.py
+```
 
 ### Step 6: Run the Application
-
+```text
 python run.py
+```
 
 The API will be available at http://localhost:5000
 
