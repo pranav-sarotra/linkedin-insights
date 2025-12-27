@@ -1,0 +1,426 @@
+{
+	"info": {
+		"name": "LinkedIn Insights API",
+		"description": "API collection for LinkedIn Insights Microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000"
+		}
+	],
+	"item": [
+		{
+			"name": "Health and Info",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": ["{{base_url}}"],
+							"path": ["health"]
+						}
+					}
+				},
+				{
+					"name": "API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": ["{{base_url}}"],
+							"path": [""]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Scraping",
+			"item": [
+				{
+					"name": "Scrape DeepSolv",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv/scrape",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv", "scrape"]
+						}
+					}
+				},
+				{
+					"name": "Scrape Google",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/google/scrape",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "google", "scrape"]
+						}
+					}
+				},
+				{
+					"name": "Scrape Microsoft",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/microsoft/scrape",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "microsoft", "scrape"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Get All Pages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", ""]
+						}
+					}
+				},
+				{
+					"name": "Get Pages - Filter by Followers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/?follower_range=20k-100k",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", ""],
+							"query": [
+								{
+									"key": "follower_range",
+									"value": "20k-100k"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Pages - Search by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/?name=deep",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", ""],
+							"query": [
+								{
+									"key": "name",
+									"value": "deep"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Pages - Filter by Industry",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/?industry=Technology",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", ""],
+							"query": [
+								{
+									"key": "industry",
+									"value": "Technology"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Pages - With Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/?page=1&per_page=5",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", ""],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "5"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Pages - Multiple Filters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/?follower_range=10k-50k&industry=Technology&page=1&per_page=10",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", ""],
+							"query": [
+								{
+									"key": "follower_range",
+									"value": "10k-50k"
+								},
+								{
+									"key": "industry",
+									"value": "Technology"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "10"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Single Page",
+			"item": [
+				{
+					"name": "Get Page - Basic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv"]
+						}
+					}
+				},
+				{
+					"name": "Get Page - With Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv?include_posts=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv"],
+							"query": [
+								{
+									"key": "include_posts",
+									"value": "true"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Page - With Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv?include_employees=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv"],
+							"query": [
+								{
+									"key": "include_employees",
+									"value": "true"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Page - With Posts and Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv?include_posts=true&include_employees=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv"],
+							"query": [
+								{
+									"key": "include_posts",
+									"value": "true"
+								},
+								{
+									"key": "include_employees",
+									"value": "true"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Page - Force Refresh",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv?force_refresh=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv"],
+							"query": [
+								{
+									"key": "force_refresh",
+									"value": "true"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get Page Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv/posts",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv", "posts"]
+						}
+					}
+				},
+				{
+					"name": "Get Page Posts - With Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv/posts?page=1&per_page=5",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv", "posts"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "5"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Page Posts - With Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv/posts?include_comments=true",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv", "posts"],
+							"query": [
+								{
+									"key": "include_comments",
+									"value": "true"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Employees and Followers",
+			"item": [
+				{
+					"name": "Get Page Employees",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv/employees",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv", "employees"]
+						}
+					}
+				},
+				{
+					"name": "Get Page Employees - With Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv/employees?page=1&per_page=5",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv", "employees"],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "per_page",
+									"value": "5"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Page Followers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv/followers",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv", "followers"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "AI Summary",
+			"item": [
+				{
+					"name": "Get Page Summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pages/deepsolv/summary",
+							"host": ["{{base_url}}"],
+							"path": ["api", "pages", "deepsolv", "summary"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
